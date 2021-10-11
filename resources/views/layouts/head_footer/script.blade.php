@@ -238,7 +238,7 @@ $(function() {
 
     //console.log(urlPath);
     let strPath = urlPath.split("/");
-    let pathName = strPath[2];
+    let pathName = strPath[4];
     //console.log(pathName,urlPath);
 
     if (pathName === 'create-invoice') {
