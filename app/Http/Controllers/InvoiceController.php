@@ -16,11 +16,13 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-     
-
+ 
+        $name = $request->name;
+        $dataOut = $request->dataOut;//;
+        $dataEnd = $request->dataEnd;//;
+      
         $invoiceUser = DB::table('invoices')
         ->select('name')
         ->distinct()
@@ -30,13 +32,62 @@ class InvoiceController extends Controller
         ->leftJoin('customers', 'invoices.name', '=', 'customers.name_customer')
         ->get();*/
 
-        
-        $bill = DB::table('customers')
-        ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
-        ->get();
 
-       // dd($bill);
-        return view('bill.list_invoice' , ['bill' => $bill , 'invoiceUser' => $invoiceUser]);
+        if ($name) {
+                if ($dataOut) {
+                    if ($dataEnd) {
+
+                        $bill = DB::table('customers')
+                        ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                        ->where("name", 'LIKE', '%'.$name. '%')
+                        ->where('issuedDateIssue','>=', $dataOut)
+                        ->where('dateDue','<=', $dataEnd)
+                        ->where("status", '=', 'due')
+                        ->orderBy('invoices.id', 'asc')
+                        ->get();
+    
+                     return view('bill.list_invoice' , ['bill' => $bill , 'invoiceUser' => $invoiceUser]);
+                    
+                    }else{
+
+                        $bill = DB::table('customers')
+                        ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                        ->where("name", 'LIKE', '%'.$name. '%')
+                        ->where('issuedDateIssue','>=', $dataOut)
+                        ->where("status", '=', 'due')
+                        ->orderBy('invoices.id', 'asc')
+                        ->get();
+    
+                     return view('bill.list_invoice' , ['bill' => $bill , 'invoiceUser' => $invoiceUser]);
+
+                    }
+
+                }else{
+
+                    $bill = DB::table('customers')
+                        ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                        ->where("name", 'LIKE', '%'.$name. '%')
+                        ->where("status", '=', 'due')
+                        ->orderBy('invoices.id', 'asc')
+                        ->get();
+ 
+                    return view('bill.list_invoice' , ['bill' => $bill , 'invoiceUser' => $invoiceUser]);
+
+                }
+          
+        }else{
+
+            $bill = DB::table('customers')
+            ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+            ->orderBy('invoices.id', 'asc')
+            ->where("status", '=', 'due')
+            ->get();
+           // dd( $bill );
+      
+            return view('bill.list_invoice' , ['bill' => $bill , 'invoiceUser' => $invoiceUser]);
+        }
+        
+        
     }
     
 
@@ -109,6 +160,7 @@ class InvoiceController extends Controller
             'priceGoods' => $request['priceGoods'],
             'vat' => $request['vat'],
             'netTotal' => $request['netTotal'],
+            'status' =>  'due',
             
         ]);
 
@@ -187,6 +239,7 @@ class InvoiceController extends Controller
         $addIn->vat = $request->vat;
         $addIn->netTotal = $request->netTotal;
         
+        
 
     
         $addIn->save();
@@ -194,6 +247,31 @@ class InvoiceController extends Controller
         return response()->json(['message'=>'เเก้ไข เรียบร้อย']);
 
     }
+
+
+    public function updateStatus(Request $request)
+    {
+
+        
+      
+       $data = $request->idjson;
+ 
+  
+    
+        foreach ($data as $product) {
+            $addIn = Invoice::find($product);
+            $addIn->status = 'Unpaid';
+            $addIn->save();
+        }
+      
+            
+  
+
+    
+
+  
+    }
+
 
     /**
      * Remove the specified resource from storage.

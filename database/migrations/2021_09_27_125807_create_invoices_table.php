@@ -27,6 +27,7 @@ class CreateInvoicesTable extends Migration
             $table->string('priceGoods');
             $table->string('vat');
             $table->string('netTotal');
+            $table->string('status');
             $table->timestamps();
         });
     }

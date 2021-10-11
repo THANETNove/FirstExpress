@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\DB;
-use  Maatwebsite\Excel\Excel;
 
 class ManageListController extends Controller
 {
@@ -17,9 +15,8 @@ class ManageListController extends Controller
     public function index()
     {
 
- 
-
-        return view('managelist.index' );
+       
+        return view('managelist.index');
     }
 
     /**
@@ -34,65 +31,10 @@ class ManageListController extends Controller
 
     public function apiManageList()
     {
-        $customer_data = DB::table('apidata')
-        ->get();
+
       
-       return view('managelist.apiManageList',  ['customer_data' => $customer_data]);
+       return view('managelist.apiManageList');
     }
-
-    function excel()
-    {
-      /*
-     $customer_data = DB::table('apidata')->get()->toArray();
-     $customer_array[] = array('orderId', 'invNo', 'barcode', 'shipperName', 'shipperAddress','shipperDistrict','shipperProvince','shipperZipcode',
-    'shipperEmail','shipperMobile','cusName','cusAdd','cusAmp','cusProv','cusZipcode','cusTel','productPrice','productInbox','productWeight','orderType','manifestNo',
-    'merchantId','merchantZipcode','storeLocationNo','insurance','insuranceRatePrice');
-     foreach($customer_data as $customer)
-     {
-      $customer_array[] = array(
-       'orderId'  => $customer->orderId,
-       'invNo'   => $customer->invNo,
-       'barcode'    => $customer->barcode,
-       'shipperName'  => $customer->shipperName,
-       'shipperAddress'   => $customer->shipperAddress,
-       'shipperDistrict'   => $customer->shipperDistrict,
-       'shipperProvince'   => $customer->shipperProvince,
-       'shipperZipcode'   => $customer->shipperZipcode,
-       'shipperEmail'   => $customer->shipperEmail,
-       'shipperMobile'   => $customer->shipperMobile,
-       'cusName'   => $customer->cusName,
-       'cusAdd'   => $customer->cusAdd,
-       'cusAmp'   => $customer->cusAmp,
-       'cusProv'   => $customer->cusProv,
-       'cusZipcode'   => $customer->cusZipcode,
-       'cusTel'   => $customer->cusTel,
-       'productPrice'   => $customer->productPrice,
-       'productInbox'   => $customer->productInbox,
-       'productWeight'   => $customer->productWeight,
-       'orderType'   => $customer->orderType,
-       'manifestNo'   => $customer->manifestNo,
-       'merchantId'   => $customer->merchantId,
-       'merchantZipcode'   => $customer->merchantZipcode,
-       'storeLocationNo'   => $customer->storeLocationNo,
-       'insurance'   => $customer->insurance,
-       'insuranceRatePrice'   => $customer->insuranceRatePrice
-      );
-     }
-    Excel::create('Customer Data', function($excel) use ($customer_array){
-      $excel->setTitle('Customer Data');
-      $excel->sheet('Customer Data', function($sheet) use ($customer_array){
-       $sheet->fromArray($customer_array, null, 'A1', false, false);
-      });
-     })*/
-     Excel::create('Export data', function($excel) {
-
-
-      })->download('xls');
-
-     
-
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -125,11 +67,11 @@ class ManageListController extends Controller
         $curl = curl_init();
 
         $dataArray = array(
-            "orderId" => "309155597",
-            "invNo"  => "309155597-8629",
-            "barcode"  => "EY660437537TH",
-            "shipperName"  => "สมใจ",
-            "shipperAddress"  => "111 หมู่ที่  1 อำเภอปลายพระยา ",
+            "orderId"  => "309155597",
+            "invNo" => "309155597-8629",
+            "barcode" => "EY660437537TH",
+            "shipperName" => "สมใจ",
+            "shipperAddress" => "111 หมู่ที่  1 อำเภอปลายพระยา ",
             "shipperDistrict"  => "ปลายพระยา ",
             "shipperProvince"  => "กระบี่",
             "shipperZipcode"  => "81160",
@@ -198,7 +140,7 @@ class ManageListController extends Controller
         $curl = curl_init();
 
         $dataArray = array(
-            "orderId" => "309155597",
+           
         );
  
 

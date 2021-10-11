@@ -207,6 +207,6 @@
 <!-- ./wrapper -->
 @include('maun_footer.footer')
 
-@include('bill.invoiceScript')
+@include('bill.scrript.invoiceScript')
 
 @endsection

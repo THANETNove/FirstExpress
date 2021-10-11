@@ -57,13 +57,13 @@
                                             <div class="col-sm-12 col-md-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">วันที่ออก*</label>
-                                                    <input type="text" id="date-issued1" value="" class="form-control datepicker_out">
+                                                    <input type="text" id="date-issued1" value="" class="form-control datepicker_out" placeholder="2021-10-06">
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">วันที่ครบกำหนด*</label>
-                                                    <input type="text" id="date-end2" value="" class="form-control datepicker">
+                                                    <input type="text" id="date-end2" value="" class="form-control datepicker" placeholder="2021-10-06">
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-4">
@@ -115,12 +115,12 @@
                                         </td>
                                         <td>
                                             <input type="text" class="form-control text-right datepicker" id="name_11"  value=""
-                                                placeholder="05/06/2018" aria-label="Username"
+                                                placeholder="2021-10-06" aria-label="Username"
                                                 aria-describedby="basic-addon1">
                                         </td>
                                         <td>
                                             <input type="text" class="form-control text-right datepicker_out" id="name_21"  value=""
-                                                placeholder="12/06/2018" aria-label="Username"
+                                                placeholder="2021-10-06" aria-label="Username"
                                                 aria-describedby="basic-addon1">
                                         </td>
                                         <td>

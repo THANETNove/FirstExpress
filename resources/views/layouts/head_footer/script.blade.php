@@ -47,17 +47,23 @@ $(function() {
 });
 $(function() {
     $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        startDate: '-3d'
+        minDate: -20,
+        maxDate: "+1M +10D",
+        dateFormat: "yy-mm-dd",
+        altFormat: "yymmdd",
+        altField: "#alt-date"
     });
 });
 
 
 $(function() {
-    $('.datepicker_out').datepicker();
-});
-$(function() {
-    $('.datepicker').datepicker();
+    $('.datepicker_out').datepicker({
+        minDate: -20,
+        maxDate: "+1M +10D",
+        dateFormat: "yy-mm-dd",
+        altFormat: "yymmdd",
+        altField: "#alt-date"
+    });
 });
  </script>
 
@@ -111,8 +117,11 @@ function myCreateFunction() {
 
     $('#my_id').html(id);
     $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        startDate: '-3d'
+        minDate: -20,
+        maxDate: "+1M +10D",
+        dateFormat: "yy-mm-dd",
+        altFormat: "yymmdd",
+        altField: "#alt-date"
     });
     //console.log(item);
 
@@ -148,10 +157,10 @@ function myCreateFunctionTwo(item) {
             "'  placeholder='IN-201860006'  class='form-control text-right check-td'>";
         cell3.innerHTML = "<input type='text '   id='" + id_name_1 + "'  name='" + id_name_1 +
             "' value='" + item.dataIssue +
-            "'  placeholder='15/06/2018'  class='form-control text-right datepicker check-td'>";
+            "'  placeholder='2021-10-06'  class='form-control text-right datepicker check-td'>";
         cell4.innerHTML = "<input type='text   id='" + id_name_2 + "' name='" + id_name_2 +
             "'    value='" + item.dueDate +
-            "' placeholder='12/06/2018' class='form-control text-right datepicker check-td'>";
+            "' placeholder='2021-10-06' class='form-control text-right datepicker check-td'>";
         cell5.innerHTML = "<input type='text '  id='" + id_name_3 + "' name='" + id_name_3 +
             "'     value='" + item.netTotal + "' placeholder='000.00' class='form-control text-right check-td'>";
         cell6.innerHTML = "  <input type='text  '  id='" + id_name_4 + "' name='" + id_name_4 +
@@ -164,24 +173,28 @@ function myCreateFunctionTwo(item) {
         cell2.innerHTML = "<input type='text '  id='" + id_name_0 + "' name='" + id_name_0 +
             "'  value=''  placeholder='IN-201860006'  class='form-control text-right check-td'>";
         cell3.innerHTML = "<input type='text '   id='" + id_name_1 + "'  name='" + id_name_1 +
-            "'   value=''  placeholder='15/06/2018'  class='form-control text-right datepicker check-td'>";
+            "'   value=''  placeholder='2021-10-06'  class='form-control text-right datepicker check-td'>";
         cell4.innerHTML = "<input type='text   id='" + id_name_2 + "' name='" + id_name_2 +
-            "'    value='' placeholder='12/06/2018' class='form-control text-right datepicker check-td'>";
+            "'    value='' placeholder='2021-10-06' class='form-control text-right datepicker check-td'>";
         cell5.innerHTML = "<input type='text '  id='" + id_name_3 + "' name='" + id_name_3 +
             "'    value='' placeholder='000.00' class='form-control text-right check-td'>";
         cell6.innerHTML = "  <input type='text  '  id='" + id_name_4 + "' name='" + id_name_4 +
             "'  placeholder='000.00' class='form-control text-right check-td'>";
-            cell7.outerHTML =
+        cell7.outerHTML =
             " <td><div class='row'><div class='col-sm-12 col-md-8'><input type='text' class='form-control text-right input_number' id='" +
-            idInput + "'value='' placeholder='000.00'  onChange='change_send(this.value)'></div><div class='col-sm-12 col-md-4'><a type='button' id='deleteRows' onclick='myDeleteFunction(this)'  value='Del'> <i class='fas fas fa-times'></i></a>&nbsp;&nbsp;<a type='button' onclick='myCreateFunctionTwo()'> <i class='fas fa-plus'></i></a></div></div></td>";
+            idInput +
+            "'value='' placeholder='000.00'  onChange='change_send(this.value)'></div><div class='col-sm-12 col-md-4'><a type='button' id='deleteRows' onclick='myDeleteFunction(this)'  value='Del'> <i class='fas fas fa-times'></i></a>&nbsp;&nbsp;<a type='button' onclick='myCreateFunctionTwo()'> <i class='fas fa-plus'></i></a></div></div></td>";
     }
 
 
 
     $('#my_id').html(id);
     $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        startDate: '-3d'
+        minDate: -20,
+        maxDate: "+1M +10D",
+        dateFormat: "yy-mm-dd",
+        altFormat: "yymmdd",
+        altField: "#alt-date"
     });
     //console.log(item);
 
@@ -190,7 +203,7 @@ function myCreateFunctionTwo(item) {
 var munberA = 0;
 
 function myDeleteFunction(node) {
-//console.log('dasasdasdd');
+    //console.log('dasasdasdd');
     let numVal = $(node).parents().children(3).children(3).children(10).eq(2).val();
     //console.log(numVal);
     namValA = munberA - Number(numVal); // ยอดรวมสุทธิ
@@ -225,7 +238,7 @@ $(function() {
 
     //console.log(urlPath);
     let strPath = urlPath.split("/");
-    let pathName = strPath[4];
+    let pathName = strPath[2];
     //console.log(pathName,urlPath);
 
     if (pathName === 'create-invoice') {
@@ -321,7 +334,7 @@ function editInvoice(datajson) {
 
 
 function Invoice() {
-
+    console.log('22222');
     var issuedDateIssue = jQuery('#date-issued1').val();
     var dateDue = jQuery('#date-end2').val();
     var documentThat = jQuery('#idBn-2018').val();

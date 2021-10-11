@@ -47,39 +47,50 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="mb-3 row">
-                                                                <label for="inputPassword"
-                                                                    class="col-sm-2 col-form-label">ลูกค้า</label>
-                                                                <div class="col-sm-7">
-                                                                    <select class="form-control" aria-label="Default select example">
-                                                                        @foreach ($invoiceUser as $invoice)
-                                                                         <option value="3">{{$invoice->name}}</option>
-                                                                        @endforeach
-                                                                    </select>
+                                                    <form method="POST" action="list-invoice">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="mb-3 row">
+                                                                    <label for="inputPassword"
+                                                                        class="col-sm-2 col-form-label">ลูกค้า</label>
+                                                                    <div class="col-sm-7">
+                                                                        <select class="form-control " name="name"
+                                                                            aria-label="Default select example">
+                                                                            @foreach ($invoiceUser as $invoice)
+                                                                            <option value="{{$invoice->name}}">
+                                                                                {{$invoice->name}}
+                                                                            </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                        <div class="mb-3 row">
-                                                                <label for="inputPassword"
-                                                                    class="col-sm-4 col-form-label">วันที่ส่งของ</label>
-                                                                <div class="col-sm-7">
-                                                                    <input type="text" id="datepicker" class="form-control datepicker">
+                                                            <div class="col-md-4">
+                                                                <div class="mb-3 row">
+                                                                    <label for="inputPassword"
+                                                                        class="col-sm-4 col-form-label">วันที่ส่งของ</label>
+                                                                    <div class="col-sm-7">
+                                                                        <input type="text" id="dataOut" name="dataOut"
+                                                                            class="form-control datepicker dataget">
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                        <div class="mb-3 row">
-                                                                <label for="inputPassword"
-                                                                    class="col-sm-2 col-form-label">ถึง</label>
-                                                                <div class="col-sm-7">
-                                                                    <input type="text" id="datepicker_out" class="form-control datepicker_out">
-                                                                </div>
+                                                            <div class="col-md-4">
+                                                                <div class="mb-3 row">
+                                                                    <label for="inputPassword"
+                                                                        class="col-sm-2 col-form-label">ถึง</label>
+                                                                    <div class="col-sm-7">
+                                                                        <input type="text" id="dataEnd" name="dataEnd"
+                                                                            class="form-control datepicker_out dataget">
+
+                                                                    </div>
+                                                                    <button class="btn btn-outline-secondary col-sm-2"
+                                                                        type="submit"><i
+                                                                            class="fas fa-search"></i></button>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
 
@@ -98,7 +109,7 @@
                                                                     <tr role="row">
                                                                         <th class="col-sm-1">
                                                                             <div class="text-center ">
-                                                                                <input class="list-invo" type="checkbox"
+                                                                                <input class="list-invo allClick" type="checkbox"
                                                                                     value="" id="flexCheckDefault">
                                                                             </div>
                                                                         </th>
@@ -133,13 +144,13 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                @foreach ($bill as $user)
+                                                                    @foreach ($bill as $user)
                                                                     <tr class="odd">
                                                                         <td>
                                                                             <div class="text-center">
-                                                                                <input class="form-check-input"
-                                                                                    type="checkbox" value=""
-                                                                                    id="flexCheckDefault">
+                                                                                <input class="form-check-input click"
+                                                                                    type="checkbox"   value="{{$user->id}}"
+                                                                                    id="flexCheck">
                                                                             </div>
                                                                         </td>
                                                                         <td>{{$user->customerCode}}</td>
@@ -152,7 +163,8 @@
                                                                         <td>{{$user->vat}}</td>
                                                                         <td>{{$user->netTotal}}</td>
                                                                         <td>
-                                                                        <a class="btn btn-primary" href="{{url('invoiceEidit',$user->id)}}">เเก้ไข</a>
+                                                                            <a class="btn btn-primary"
+                                                                                href="{{url('invoiceEidit',$user->id)}}">เเก้ไข</a>
                                                                         </td>
                                                                     </tr>
                                                                     @endforeach
@@ -163,12 +175,14 @@
                                                 </div>
                                                 <br>
                                                 <br>
-                                                <button type="button" class="btn btn-danger box-inv_to ">ดูตัวอย่างใบเเจ้งหนี้</button>
-                                               
- 
-                                                <button type="button" class="btn btn-outline-danger box-inv">ยันยันออกใบเเจ้งหนี้</button>
-                                                
-                                              
+                                                <button type="button"
+                                                    class="btn btn-danger box-inv_to " data-bs-toggle="modal" data-bs-target="#exampleModal" >ยันยันออกใบเเจ้งหนี้</button>
+
+
+                                                <button type="button"
+                                                    class="btn btn-outline-danger box-inv" > ดูตัวอย่างใบเเจ้งหนี้</button>
+
+
                                             </div>
                                         </div>
                                     </section>
@@ -186,6 +200,30 @@
 
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ยันยันออกใบเเจ้งหนี้</h5>
+        <button type="button" class="close" data-bs-dismiss="modal">
+                    <i class="fas fa-times-circle text-red"></i>
+                </button>
+      </div>
+      <div class="modal-body">
+        <p id="errorCheckbox" class="text-center text-red"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+            <button type="button" class="btn btn-primary "  data-bs-dismiss="modal" onclick="clickInvoice()">ยื่นยัน</button>
+ 
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -195,5 +233,6 @@
 </div>
 <!-- ./wrapper -->
 @include('maun_footer.footer')
+@include('bill.scrript.list_invoice')
 
 @endsection
